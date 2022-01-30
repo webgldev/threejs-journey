@@ -1,7 +1,7 @@
 ## 03 Basic scene 기본화면
 
 [threejs](https://threejs.org/) 사이트에 접속하여 좌측 메뉴에 download로 코드 다운받기 Code > download
-([여기서](https://github.com/webgldev/threejs-journey/tree/chapter/src.git) `three.min.js` 을 사용할 예정)
+([여기서](https://github.com/webgldev/threejs-journey/tree/chapter/src) `three.min.js` 을 사용할 예정)
 
 `index.html` 에 스크립트 추가
 ```
