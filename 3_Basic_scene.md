@@ -4,10 +4,11 @@
 ([여기서](https://github.com/webgldev/threejs-journey/tree/chapter/src) `three.min.js` 을 사용할 예정)
 
 `index.html` 에 스크립트 추가
-```
+```js
 <script src="./three.min.js"></script> // 라이브러리를 먼저 불러오고
 <script src="./script.js"></script>    // 그다음 내가 작성할 스크립트를 불러옴
 ```
+
 `script.js`에 콘솔 찍어보고 브라우저 열어서 콘솔 나오는거 확인
 
 `console.log(THREE); 를 찍어보면 콘솔에서 속성을 확인 할 수 있습니다.`

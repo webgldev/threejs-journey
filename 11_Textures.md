@@ -55,7 +55,7 @@ Mapping Modes, Wrapping Modes, Magnification Filters, Types, Formats 등등   �
 
 웹팩에 이미지 Path를 미리 설정해두었기 때문에 src에서 이미지 경로 지정해서 사용해도 됩니다.  
 `webpack.common.js`
-```
+```js
 // Images
 {
   test: /\.(jpg|png|gif|svg)$/,
@@ -75,7 +75,7 @@ Mapping Modes, Wrapping Modes, Magnification Filters, Types, Formats 등등   �
 - JS로 만들면 인스턴스에 패스를 직접 설정해줍니다.
 
 `script.js`
-```
+```js
 // Textures
 const image = new Image()  // 이미지 하나 만들고
 const texture = new THREE.Texture(image) // 이미지를 텍스처에 넣어줍니다.
@@ -88,7 +88,7 @@ image.src = '/textures/door/color.jpg' // 이미지 경로도 적어줍니다.
 ```
 
 이미지 불러왔으니 그다음 material에 texture를 적용해줍니다.
-```
+```js
 const material = new THREE.MeshBasicMaterial({
   map: texture,
   // color: parameters.color,
@@ -102,13 +102,13 @@ const material = new THREE.MeshBasicMaterial({
 
 근데 위에꺼 다 지우고 3js가 제공해주는 Loaders를 사용해도됩니다. [( Docs )](https://threejs.org/docs/index.html?q=tex#api/en/loaders/TextureLoader)
 
-```
+```js
 const textureLoader = new THREE.TextureLoader()  // 텍스처 로더로 불러오고
 const texture = textureLoader.load('/textures/door/color.jpg') // 이미지 경로 지정하면 됩니다.
 ```
 
 콜백으로 이미지가 잘 불러와지는지 `load, progress, error` 로 알아볼 수도 있습니다.
-```
+```js
 const texture = textureLoader.load(
   '/textures/door/color.jpg',
   () => {console.log('load')},
@@ -119,7 +119,7 @@ const texture = textureLoader.load(
 
 - 이벤트를 추가하려면 LoadingManager에 인스턴스를 만들고 TextureLoader에 전달해줍니다.
 
-```
+```js
 const loadingManager = new THREE.LoadingManager()
 loadingManager.onStart  = () => {console.log('onStart')}
 loadingManager.onLoaded = () => {console.log('onLoaded')}
@@ -129,7 +129,7 @@ const textureLoader = new THREE.TextureLoader(loadingManager)
 
 - 모든 텍스처 종류 불러오기
 
-```
+```js
 const colorTexture = textureLoader.load('/textures/door/color.jpg')
 const alphaTexture = textureLoader.load('/textures/door/alpha.jpg')
 const heightTexture = textureLoader.load('/textures/door/height.jpg')
@@ -234,7 +234,7 @@ colorTexture.generateMipmaps = false 로 mipmap을 비활성해서 GPU의 부하
 ![image](https://user-images.githubusercontent.com/54713067/129071283-ba401cba-30bd-4ba6-8538-3fa1afba7c7d.png)
 
 - minFilter 프로퍼티를 사용해서 텍스처를 축소하거나 필터를 변경할수 있습니다.
-```
+```js
 THREE.NearestFilter
 THREE.LinearFilter
 THREE.NearestMipmapNearestFilter
@@ -246,7 +246,7 @@ THREE.LinearMipmapLinearFilter (default)
 `minFilter`에 `THREE.NearestFilter` 를 사용하면 mpmaps가 필요없어서  
 `colorTexture.generateMipmaps = false` 를 적용해줍니다.
 
-```
+```js
 colorTexture.generateMipmaps = false
 colorTexture.minFilter = THREE.NearestFilter
 ```

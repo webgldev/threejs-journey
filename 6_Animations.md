@@ -9,7 +9,7 @@
 
 간단히 애니메이션으로 오브젝트를 이동시키려면  
 
-```
+```js
   // 애니메이션 함수를 만들어주고, 화살표함수로 콜백에서 동작하게 하고
   const move = () => {
 
@@ -41,7 +41,7 @@ Date.now()를 사용해서 timestamp를 얻을수 있습니다.
 
 이걸 단축해서 줄이려면
 
-```
+```js
 let으로 선언한 time 변수와 콜백안에있는 currentTime 변수는 같은 Date.now()라도 다르게 실행됨
 
 // 애니메이션 밖에 time 변수를 선언해서 한번만 실행되게 해두고
@@ -66,7 +66,7 @@ move()
 3js가 제공해주는 Clock 개체에 있는 `getElapsedTime()` 메서드를 사용하면 ms 로 출력해줍니다.  
 그럼 `3.088599999904638` 이런식으로 콘솔에 나오게됩니다.
 
-```
+```js
 // Clock
 const clock = new THREE.Clock()
 
@@ -120,14 +120,15 @@ https://user-images.githubusercontent.com/54713067/128571810-1bf91775-1951-452d-
 
 위에는 오브젝트에 포지션을 직접 적용했기 때문에 오브젝트가 이동되는데
 
-```
+```js
 mesh.position.y = Math.sin(elapsedTime)
 mesh.position.x = Math.cos(elapsedTime)
 ```
 
 이번엔 카메라에 포지션을 직접 적용해서 오브젝트가 움직이지 않고  
 카메라가 회전되도록 적용하고, lookAt을 사용해서 공간에 한점을 보도록 하려합니다.
-```
+
+```js
 camera.position.y = Math.sin(elapsedTime)
 camera.position.x = Math.cos(elapsedTime)
 camera.lookAt(mesh.position)
@@ -164,7 +165,7 @@ https://user-images.githubusercontent.com/54713067/128574261-1a0f273d-f7a4-4114-
 
 그럼 이제 애니메이션은 gsap로 적용해주고 카메라만 애니메이션 프레임안에 남습니다.
 
-```
+```js
 gsap.to(mesh.position, { duration: 1, delay: 1, x: 2 })
 gsap.to(mesh.position, { duration: 1, delay: 2, x: 0 })
 

@@ -3,18 +3,19 @@
 
 픽셀의 색상은 shader로 작성합니다. 3js는 shader가 포함된 빌트인 머테리얼이 있습니다.
 
-
-
 [1] Prepare our scene
 
+```js
 // MeshBasicMaterial 기본 메쉬 추가하고 3개 오브젝트에 같은 머테리얼 적용
 const material = new THREE.MeshBasicMaterial()
+
 // 1번 공
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 16, 16),
     material
 )
 sphere.position.x = - 1.5
+
 // 2번 플랜
 const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1),
@@ -29,7 +30,6 @@ torus.position.x = 1.5
 
 // .add() 메서드에 멀티플 오브젝트 추가
 scene.add(sphere, plane, torus)
-
 
 // 앞장에서 배웠던대로 오브젝트 회전시켜보기
 const clock = new THREE.Clock()
@@ -49,17 +49,16 @@ tick()
 const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
 const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
 
-
-
 // 기타 더 많은 머테리얼을 보려면 독스에서 직접 확인
 
 https://threejs.org/docs/?q=mate#api/en/constants/Materials
-
+```
 
 
 [2] MeshBasicMaterial (기본)
 
 
+```js
 // 머테리얼을 파라미터로 받아서 프로퍼티를 설정할수도 있지만
 const material = new THREE.MeshBasicMaterial({
     map: doorColorTexture
@@ -89,23 +88,24 @@ material.alphaMap = doorAlphaTexture
 // 앞면 THREE.FrontSide , 뒷면 THREE.BackSide , 앞뒤 둘다 표시 THREE.DoubleSide
 material.side = THREE.DoubleSide
 // DoubleSide의 경우는 렌더링할 면이 두배로 많아지기 때문에 주의
-
+```
 
 
 [3] MeshNormalMaterial
 
+```js
 // 노말은 각 버텍스가 면에서 밖을 향하는 방향이 encoded 된 정보입니다.
 // 지오메트리에 environment reflect 와 refract (반사와 굴절) 를 표현합니다
 const material = new THREE.MeshNormalMaterial()
 
 // 사용 가능한 속성 : .wireframe, .transparent, .opacity, .side, .flatShading
 .flatShading은 각진 면을 보여줍니다.
-
+```
 
 
 [4] MeshMatcapMaterial
 
-
+```js
 // MeshMatcapMaterial은 성능이 좋습니다.
 // .matcap 에 matcapTexture 텍스처를 적용해서 사용
 
@@ -117,23 +117,24 @@ const matcapTexture = textureLoader.load('/textures/matcaps/2.png')
 // 포토샵에서도 matcaps를 만들수 있습니다.
 
 // 다양한 목록을 더 보려면 https://github.com/nidorx/matcaps
-
+```
 
 
 [5] MeshDepthMaterial
 
 
-
+```js
 // 카메라에서 멀리 떨어져있는 원근감을 갖기위해 첫번째로 MeshDepthMaterial를 적용
 
 // 오브젝트가 카메라에 가까우면 지오메트리를 흰색으로, 멀면 블랙으로 표시
 
 const material = new THREE.MeshDepthMaterial()
-
+```
 
 
 [6] Adding a few lights
 
+```js
 // 라이팅 두개 추가
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 scene.add(ambientLight)
@@ -143,29 +144,32 @@ pointLight.position.x = 2
 pointLight.position.y = 3
 pointLight.position.z = 4
 scene.add(pointLight)
-
+```
 
 
 [7] MeshLambertMaterial
 
+```js
 // 빛에 반사되는 휘도를 보려면
 // MeshBasicMaterial과 같은 속성을 지원합니다.
 const material = new THREE.MeshLambertMaterial()
-
+```
 
 
 [8] MeshPhongMaterial
 
+```js
 // MeshLambertMaterial보다는 성능이 떨어지지만 빛 반사를 제어할수 있습니다.
 
 // .shininess 는 높을수록 반짝이고 .specular 는 반사 컬러를 지정할 수 있습니다.
 
 material.shininess = 100
 material.specular = new THREE.Color(0x1188ff)
-
+```
 
 [9] MeshToonMaterial
 
+```js
 // 만화 스타일 적용하려면
 
 const material = new THREE.MeshToonMaterial()
@@ -181,11 +185,12 @@ material.gradientMap = gradientTexture
 gradientTexture.minFilter = THREE.NearestFilter
 gradientTexture.magFilter = THREE.NearestFilter
 gradientTexture.generateMipmaps = false
-
+```
 
 
 [10] MeshStandardMaterial
 
+```js
 // MeshLambertMaterial 및 MeshPhongMaterial 보다 matalness와 roughness 처럼 현실적인 알고리즘 파라미터를 적용합니다.
 
 const material = new THREE.MeshStandardMaterial()
@@ -228,13 +233,14 @@ material.normalScale.set(0.5, 0.5)
 // 투명값 적용해서 알파맵 사용
 material.transparent = true
 material.alphaMap = doorAlphaTexture
-
+```
 
 
 [11] Environment map
 
 Environment map으로 오브젝트에 반사와 굴절을 추가할수 있습니다.
 
+```js
 // 디버그 UI에 MeshStandardMaterial 을 설정해서 사용
 
 const material = new THREE.MeshStandardMaterial()
@@ -242,8 +248,6 @@ material.metalness = 0.7
 material.roughness = 0.2
 gui.add(material, 'metalness').min(0).max(1).step(0.0001)
 gui.add(material, 'roughness').min(0).max(1).step(0.0001)
-
-
 
 // .envMap으로 환경맵 추가
 
@@ -262,6 +266,6 @@ const environmentMapTexture = cubeTextureLoader.load([
 ])
 
 material.envMap = environmentMapTexture
-
+```
 
 

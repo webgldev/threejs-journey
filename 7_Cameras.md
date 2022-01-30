@@ -62,7 +62,7 @@ Lear and Far 파라미터인데 극단적인 값을 적용해도 기본화면으
 이제 마우스를 따라서 움직이는 카메라를 만들어줄 것입니다.  
 앞에서 만들었던 move 함수에 mesh rotation은 지워주고, 카메라에 적용한 포지션도 지워줍니다.
 
-```
+```js
 camera.position.y = 2
 camera.position.x = 2
 ```
@@ -73,14 +73,14 @@ camera.position.x = 2
 
 이제 PerspectiveCamera로 다시 설정하고 `mousemove`를 알아볼것입니다.
 
-```
+```js
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 3
 ```
 
 `addEventListener()` 이벤트 메서드를 추가하여 `mousemove` 이벤트를 호출 [( Docs )](https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener)
 
-```
+```js
 window.addEventListener('mousemove', (e) => {
   console.log(e.clientX, e.clientY)
 })
@@ -89,7 +89,7 @@ window.addEventListener('mousemove', (e) => {
 `const cursor = { x: 0, y: 0 }` cursor 변수에 x와 y를 넣어서  
 mousemove 이벤트안에 추가하고 move에 카메라 포지션을 넣어줄것입니다.
 
-```
+```js
 window.addEventListener('mousemove', (e) => {
   cursor.x = e.clientX / sizes.width - 0.5 // -0.5를 준 이유는 좌측으로 가면 마이너스 우측으로 가면 플러스로 표시해주기위해서임
   cursor.y = - (e.clientY / sizes.height - 0.5) // 상하에서 마이너스는 마우스를 위로올리면 마이너스, 아래로 내리면 플러스로 나옴
@@ -186,7 +186,7 @@ https://user-images.githubusercontent.com/54713067/128626520-8be9bb31-4c3f-402e-
 천천히 부드럽게 멈추려면 Damping (가속과 마찰)을 추가해줍니다.
 `enableDamping` 프로퍼티를 `true`로 설정 해주면 됩니다.
 
-```
+```js
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 ```

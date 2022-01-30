@@ -45,7 +45,7 @@ https://user-images.githubusercontent.com/54713067/128644972-3251995c-d27b-4769-
 여기에서 `new THREE.BoxGeometry(1, 1, 1, 2, 2, 2),` 삼각면에 절반을 더 나누면 (subdivisions) 면이 더 나누어집니다. (숫자가 커질수록 면이 더 나눠집니다.)
 fill로 칠해져있으면 나누어져있는게 안보이니 와이어프레임으로 보시면 확인됩니다.
 
-```
+```js
 const mesh = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1, 2, 2, 2),
   new THREE.MeshBasicMaterial({
@@ -70,7 +70,7 @@ Float32Array를 그림으로 이해해도 되는데 그림만봐서는 이해불
 
 ![image](https://user-images.githubusercontent.com/54713067/128646192-e28d2909-8382-46c6-8402-6d392e04dce9.png)
 
-```
+```js
 const positionArray = new Float32Array(9)
 
 // Float32Array(9)에서 9는 x, y, z로 그린 삼각형 3개
@@ -93,7 +93,7 @@ const positionArray = new Float32Array(9)
 
 위에 코드를 간단하게 작성하면 아래와 같습니다.
 
-```
+```js
 const positionArray = new Float32Array([
   0, 0, 0,  // First vertex
   0, 1, 0,  // Second vertex
@@ -105,7 +105,7 @@ const positionArray = new Float32Array([
 
 버텍스 점 찍었으니까 이제 버퍼를 연결해서 삼각형을 만들어보겠습니다.
 
-```
+```js
 const positionAttribute = new THREE.BufferAttribute(positionArray, 3) // 버텍스 연결해서
 const geometry = new THREE.BufferGeometry() // 버퍼 지오메트리 만들고
 geometry.setAttribute('position', positionAttribute) // 포지션 안넣어주면 화면에 안보입니다.
@@ -117,7 +117,7 @@ https://user-images.githubusercontent.com/54713067/128646635-e95ca30a-02a7-4a87-
 
 삼각형을 랜덤으로도 만들수있습니다.
 
-```
+```js
 const geometry = new THREE.BufferGeometry()
 
 const count = 100  // 100개를 랜덤으로 만들거임

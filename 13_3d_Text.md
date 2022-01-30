@@ -18,7 +18,8 @@
 [1] Load the font
 
 폰트는 FontLoader 로 임포트해서 사용합니다.  
-```
+
+```js
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 
 const fontLoader = new FontLoader()
@@ -37,7 +38,7 @@ fontLoader.load(
 
 지오메트리는 TextGeometry 를 사용합니다.
 
-```
+```js
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 
 fontLoader.load(
@@ -91,7 +92,7 @@ computeBoundingBox() 을 호출해서 박스의 경계를 계산하려합니다.
 bevel은 모서리의 경계를 등분하여 나누는 것입니다.  
 이것의 사이즈를 0.02를 빼면 텍스트를 좀더 중앙에 배치시킬 수 있습니다.
 
-```
+```js
 textGeometry.translate(
     - (textGeometry.boundingBox.max.x - 0.02) * 0.5, // Subtract bevel size
     - (textGeometry.boundingBox.max.y - 0.02) * 0.5, // Subtract bevel size
@@ -110,7 +111,7 @@ textGeometry.translate(
 
 텍스처 사이즈는 256x256이면 충분합니다.
 
-```
+```js
 const matcapTexture = textureLoader.load('/textures/matcaps/1.png') // 텍스처를 불러와서
 
 const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture }) // 직접 적용해줍니다.
@@ -121,7 +122,7 @@ const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture }) // 
 
 텍스트 주변에 도넛을 추가해봅시다.
 
-```
+```js
 for(let i = 0; i < 100; i++)
 {
     const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
@@ -133,20 +134,20 @@ for(let i = 0; i < 100; i++)
 
 도넛 백개를 랜덤으로 화면에 뿌려줍니다.
 
-```
+```js
 donut.position.x = (Math.random() - 0.5) * 10
 donut.position.y = (Math.random() - 0.5) * 10
 donut.position.z = (Math.random() - 0.5) * 10
 ```
 
 도넛의 방향을 조금 회전시킵니다.
-```
+```js
 donut.rotation.x = Math.random() * Math.PI
 donut.rotation.y = Math.random() * Math.PI
 ```
 
 도넛의 스케일도 랜덤으로 조절해봅시다.
-```
+```js
 const scale = Math.random()
 donut.scale.set(scale, scale, scale)
 ```
@@ -162,7 +163,7 @@ donut.scale.set(scale, scale, scale)
 
 donutGeometry와 donutMaterial을 for문 밖으로 꺼내줍니다.
 
-```
+```js
 const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
 const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
 

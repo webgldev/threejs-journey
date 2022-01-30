@@ -7,8 +7,9 @@
 이젠  `const sizes = { width: window.innerWidth, height: window.innerHeight }` 윈도우에 맞게 수정해 줍니다.
 
 적용하고나면 스크롤이 생기는데 이건 style에서 수정해줍니다.  
+
 `style.css`
-```
+```css
 // css에서 브라우저 유저에이전트 box model 초기화해주고
 * { margin: 0; padding: 0; } 
 
@@ -27,7 +28,7 @@ html, body {overflow: hidden;}
 지금은 전체화면을 적용해주었지만, 브라우저 사이즈가 바뀔때마다 리사이징은 안돼서  
 handle resize 를 적용해줍니다.
 
-```
+```js
 window.addEventListener('resize', () => {
   // Update sizes
   sizes.width = window.innerWidth
@@ -64,36 +65,24 @@ window.addEventListener('resize', () => {
 
 [3] Handle fullscreen
 
-```
+```js
 // .fullscreenElement는 사파리에서 프리픽스가 필요해서 else if에 웹킷 추가
 
 window.addEventListener('dblclick', () => {
-
-    const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement
-    if(!fullscreenElement) {
-
-        if(canvas.requestFullscreen() {
-
-          canvas.requestFullscreen()
-
-         } else if(canvas.webkitRequestFullscreen) {
-
-          canvas.webkitRequestFullscreen()
-
-         }
-    } else {
-
-        if(document.exitFullscreen) {
-
-          document.exitFullscreen()
-
-         } else if(document.webkitExitFullscreen) {
-
-          document.webkitExitFullscreen()
-
-         }
-
-    }
+  const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement
+  if(!fullscreenElement) {
+    if(canvas.requestFullscreen()) {
+      canvas.requestFullscreen()
+      } else if(canvas.webkitRequestFullscreen) {
+      canvas.webkitRequestFullscreen()
+      }
+  } else {
+    if(document.exitFullscreen) {
+      document.exitFullscreen()
+      } else if(document.webkitExitFullscreen) {
+      document.webkitExitFullscreen()
+      }
+  }
 })
 ```
 

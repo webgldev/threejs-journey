@@ -7,7 +7,7 @@ Object3D의 프로퍼티는
 PerspectiveCamera, Mesh
 
 - position
-```
+```js
 x, y, z 포지션을 따로 설정할 수도 있고
 mesh.position.x = 0.7
 mesh.position.y = - 0.6
@@ -24,7 +24,7 @@ mesh.position.set(0.7, - 0.6, 1)
 `scene.add(axesHelper)`
 
 - scale
-```
+```js
 x, y, z 스케일 따로 설정할 수도 있고
 mesh.scale.x = 2
 mesh.scale.y = 0.5
@@ -56,7 +56,7 @@ mesh.scale.set(2, 0.5, 0.5)
 `object.rotation.reorder('yxz')` [3js docs에 있는 reorder](https://threejs.org/docs/#api/en/math/Euler.reorder)
 
 Rotation 에 쿼터니언을 추가하고 오브젝트를 회전시켜줍니다.
-```
+```js
 mesh.rotation.reorder('YXZ')
 mesh.rotation.y = Math.PI * 0.25
 mesh.rotation.x = Math.PI * 0.25
@@ -76,14 +76,15 @@ lookAt의 Verctor3은 기본값인데
 - group  
 위에 작성했던 Mesh 오브젝트를 `Group` 으로 묶어주면 아래와 같습니다.
 
-```
+```js
 그룹으로 묶기 전 코드
 const Geometry = new THREE.BoxGeometry(1, 1, 1)
 const Material = new THREE.MeshBasicMaterial({ color: '#ff0000' })
 const mesh = new THREE.Mesh(Geometry, Material)
 scene.add(mesh)
 ```
-```
+
+```js
 오브젝트를 그룹으로 묶음
 const group = new THREE.Group()
 scene.add(group)
@@ -134,7 +135,7 @@ cube1은 그대로있고 cube2를 좌측으로 이동시켜서 큐브 두개가 
 
 마찬가지로 그룹에 scale과 rotation을 그룹에 적용해주면 됩니다.
 
-```
+```js
 const group = new THREE.Group()
 group.position.y = 0.5
 group.position.x = 1
@@ -143,6 +144,7 @@ group.rotation.y = -10
 group.rotation.x = 10
 scene.add(group)
 ```
+
 ![image](https://user-images.githubusercontent.com/54713067/128491576-40311d47-b01f-465b-b474-4accb51df6cc.png)
 
 

@@ -53,7 +53,7 @@ OrbitControls
 `gui.add(mesh.position, 'y').min(-3).max(3).step(0.01)`
 
 잘보이게 라인을 정리해주면
-```
+```js
 gui
   .add(mesh.position, 'y')
   .min(-3)
@@ -82,7 +82,7 @@ gui
 기본 컬러 외에 컬러를 사용하려면  
 onChange로 색상 선택기를 추가해서 조절하면 됩니다.
 
-```
+```js
 gui
   // 컬러 파라미터 추가하고
   .addColor(parameters, 'color')
@@ -96,7 +96,7 @@ gui
 [4] 움직이는 기능을 추가하려면
 
 변수에 spin 기능을 추가해주고
-```
+```js
 const parameters = {
 
   color: 0xff0000,
@@ -109,7 +109,7 @@ const parameters = {
 gui로 인스턴스화하여 객체로 만들어줍니다.  
 `gui.add(parameters, 'spin')`
 
-```
+```js
 const parameters = {
   color: '#ff0000',
   spin: () => {
@@ -161,7 +161,7 @@ gui
 `.folder .dg ul {margin-top: 0 !important;}`
 
 `script.js`
-```
+```js
 var gui = new dat.GUI({ load: getPresetJSON(), preset: 'Preset1' });
 
 var object1 = {
