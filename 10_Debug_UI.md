@@ -70,24 +70,45 @@ gui
   .add(material, 'wireframe')
 ```
 
-컬러도 추가할 수 있습니다.
+[3] 컬러를 추가해봅시다.
 
+
+먼저 컬러 변수를 만들어주고
+`const parameters = { color: 0xff0000 } // 헥사값 입력 가능`
+
+인스턴스를 추가해줍니다.
+`gui.addColor(parameters, 'color')`
+
+기본 컬러 외에 컬러를 사용하려면  
+onChange로 색상 선택기를 추가해서 조절하면 됩니다.
+
+```
+gui
+  // 컬러 파라미터 추가하고
+  .addColor(parameters, 'color')
+  // 컬러 바꾸면 컬러가 변경되도록 onChange도 추가해줍니다.
+  .onChange(() => { material.color.set(parameters.color) })
+  // 머테리얼 컬러도 같이 변경되도록 수정해줍니다.
+  const material = new THREE.MeshBasicMaterial({ color: parameters.color })
+```
+
+
+[4] 움직이는 기능을 추가하려면
+
+변수에 spin 기능을 추가해주고
 ```
 const parameters = {
-  color: '#ff0000'
+
+  color: 0xff0000,
+
+  spin: () => { gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + Math.PI * 2 }) }
+
 }
-
-gui
-  .addColor(parameters, 'color')   // 컬러 파라미터 추가하고
-  .onChange(() => {  // 컬러 바꾸면 컬러가 변경되도록 onChange도 추가해줍니다.
-    material.color.set(parameters.color) 
-    console.log('change the color')
-  })
-
-const material = new THREE.MeshBasicMaterial({ color: parameters.color }) // 머테리얼 컬러도 같이 변경되도록 수정해줍니다.
 ```
 
-오브젝트가 돌아가는 spin 도 추가할 수 있습니다.
+gui로 인스턴스화하여 객체로 만들어줍니다.  
+`gui.add(parameters, 'spin')`
+
 ```
 const parameters = {
   color: '#ff0000',
@@ -102,14 +123,29 @@ gui
   .add(parameters, 'spin') // spin 버튼을 클릭하면 동작합니다.
 ```
 
-`const gui = new dat.GUI({ closed: true, width: 400 })` GUI에 closed 를 true로 설정하면 열려있던 옵션이 닫혀있게 됩니다. (GUI 가로 사이즈도 지정해줄 수 있습니다.)
-`gui.hide()` 를 작성하면 GUI가 안보이게되는데 키보드 `H` 를 누르면 다시 보이게 됩니다.
+
+[5] 기타 팁들
+
+- 단축키 H 를 누르면 패널을 숨길 수 있습니다.
+
+> `const gui = new dat.GUI({ closed: true, width: 400 })` GUI에 closed 를 true로 설정하면 열려있던 옵션이 닫혀있게 됩니다. (GUI 가로 사이즈도 지정해줄 수 있습니다.)
+
+- gui.hide()를 호출하면 패널을 처음부터 안보이게 할 수 있습니다.
+
+> `gui.hide()` 를 작성하면 GUI가 안보이게되는데 키보드 `H` 를 누르면 다시 보이게 됩니다.
+
+- 패널을 처음부터 닫으려면 const gui = new dat.GUI({ closed: true }) 로 적용
+
+- 패널의 기본 width를 설정하려면 const gui = new dat.GUI({ width: 400 }) 적용
+
+- Dat.GUI에 대해 자세한 문서는 https://github.com/dataarts/dat.gui
+
+***
 
 위에있는것들 모두 종합하면 이렇게 컨트롤러가 만들어집니다.
 (GUI 순서는 인터프리터 순서대로 정렬되는듯 합니다.)
 
 ![image](https://user-images.githubusercontent.com/54713067/128742828-7c5845c3-d14b-4474-8f8e-4232dd69cc25.png)
-
 
 - bruno_simon 이 만든 컨트롤러는 [이렇게](https://bruno-simon.com/#debug) 생겼습니다.
 
